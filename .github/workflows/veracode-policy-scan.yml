@@ -130,7 +130,19 @@ jobs:
         with:
           name: policy-flaws
           path: /tmp
-
+      - name: Checkout Target Repository
+        uses: actions/checkout@v4
+        with:
+          repository: AccionQA/QuatarFlaws
+          token: ${{ inputs.token }}
+          path: target-repo
+          
+      - name: Check if policy_flaws.json exists
+        run: |
+         if [ ! -f target-repo/policy_flaws.json ]; then
+         echo "Error: policy_flaws.json file not found in target-repo."
+         exit 1
+         fi   
       - name: Convert policy scan output to SARIF format for java language
         if: ${{ inputs.language == 'Java' }}
         uses: Veracode/veracode-pipeline-scan-results-to-sarif@master
