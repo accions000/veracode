@@ -136,12 +136,6 @@ jobs:
         with:
           name: policy-flaws
           path: /tmp
-      - name: Checkout Target Repository
-        uses: actions/checkout@v4
-        with:
-          repository: AccionQA/QuatarFlaws
-          token: ${{ inputs.token }}
-          path: target-repo
           
       - name: Convert policy scan output to SARIF format
         uses: Veracode/veracode-pipeline-scan-results-to-sarif@v2.0.4
