@@ -142,7 +142,7 @@ jobs:
         uses: Veracode/veracode-pipeline-scan-results-to-sarif@v2.0.4
         with:
           scan-type: policy
-          results-json: '/target-repo/policy_flaws.json'
+          results-json: 'target-repo/policy_flaws.json'
           output-results-sarif: veracode-results.sarif
           repo_owner: ${{ inputs.owner }}
           repo_name: ${{ inputs.repo }}
