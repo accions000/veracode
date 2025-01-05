@@ -131,12 +131,13 @@ jobs:
           ref: ${{ inputs.ref }}
           token: ${{ inputs.token }}
 
-      - name: Get scan results
-        uses: actions/download-artifact@v4
+      - name: Checkout Target Repository
+        uses: actions/checkout@v4
         with:
-          name: policy-flaws
-          path: /tmp
-          
+          repository: AccionQA/QuatarFlaws
+          token: ${{ inputs.token }}
+          path: target-repo
+
       - name: Convert policy scan output to SARIF format
         uses: Veracode/veracode-pipeline-scan-results-to-sarif@v2.0.4
         with:
