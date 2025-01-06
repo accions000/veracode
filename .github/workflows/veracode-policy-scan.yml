@@ -131,17 +131,18 @@ jobs:
           ref: ${{ inputs.ref }}
           token: ${{ inputs.token }}
           
-      - name: Get flaw file
-        uses: actions/download-artifact@v4
+      - name: Checkout Target Repository
+        uses: actions/checkout@v4
         with:
-          name: 'policy-flaws'
-          path: /tmp
-
+          repository: AccionQA/QuatarFlaws
+          token: ${{ inputs.token }}
+          path: target-repo
+          
       - name: Convert policy scan output to SARIF format
-        uses: veracode/veracode-pipeline-scan-results-to-sarif@master
+        uses: veeranjaneya-reddy/veracode-pipeline-scan-results-to-sarif@master
         with:
           scan-type: policy
-          results-json: '/tmp/policy_flaws.json'
+          results-json: 'target-repo/policy_flaws.json'
           output-results-sarif: veracode-results.sarif
           repo_owner: ${{ inputs.owner }}
           repo_name: ${{ inputs.repo }}
