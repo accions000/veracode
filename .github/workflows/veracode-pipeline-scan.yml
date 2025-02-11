@@ -84,11 +84,12 @@ jobs:
         file: ${{fromJson(needs.prepare_pipeline_scan.outputs.matrix_files)}}
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Target Repository
+        uses: actions/checkout@v4
         with:
-          repository: ${{ inputs.owner }}/${{ inputs.repo }}
-          ref: ${{ inputs.ref }}
+          repository: AccionQA/QuatarFlaws
           token: ${{ inputs.token }}
+          path: target-repo
 
       - name: get archive
         uses: actions/download-artifact@v4
@@ -141,7 +142,7 @@ jobs:
         uses: Veracode/veracode-pipeline-scan-results-to-sarif@v2.0.4
         with:
           pipeline-results-json: mitigated_${{ strategy.job-index }}-filtered_results.json
-          output-results-sarif: veracode-results.sarif
+          output-results-sarif: 'target-repo/policy_flaws.json'
           repo_owner: ${{ inputs.owner }}
           repo_name: ${{ inputs.repo }}
           commitSHA: ${{ inputs.sha }}
