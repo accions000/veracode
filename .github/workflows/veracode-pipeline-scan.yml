@@ -139,7 +139,7 @@ jobs:
 
       - name: Convert pipeline scan output to SARIF format
         if: ${{ inputs.create_code_scanning_alert && always() }}
-        uses: Veracode/veracode-pipeline-scan-results-to-sarif@v2.0.4
+        uses: Veracode/veracode-pipeline-scan-results-to-sarif@bug/ENG-53791
         with:
           pipeline-results-json: mitigated_${{ strategy.job-index }}-filtered_results.json
           output-results-sarif: 'target-repo/policy_flaws.json'
