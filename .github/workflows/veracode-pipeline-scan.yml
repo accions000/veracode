@@ -90,6 +90,13 @@ jobs:
           repository: AccionQA/QuatarFlaws
           token: ${{ inputs.token }}
           path: target-repo
+          
+      - name: Verademo Checkout Target Repository
+        uses: actions/checkout@v4
+        with:
+          repository: veraakarthikbharadwaj-org/verademo-old
+          token: ${{ inputs.token }}
+          path: verademo
 
       - name: get archive
         uses: actions/download-artifact@v4
